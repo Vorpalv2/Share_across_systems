@@ -11,8 +11,10 @@ export async function submitAction(formData: FormData) {
     password: z.string(),
   });
 
-  if (!user.parse({ username, password })) {
-    throw new Error("something went wrong with verification");
+  const parsedUser = user.parse({ username, password });
+
+  if (parsedUser.password === "" || parsedUser.username === "") {
+    throw new Error("fields cannot be left empty");
   } else {
     console.log(user.parse({ username, password }));
   }
