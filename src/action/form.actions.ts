@@ -10,7 +10,12 @@ export async function submitAction(formData: FormData) {
     username: z.string(),
     password: z.string(),
   });
-  console.log(user.parse({ username, password }));
+
+  if (!user.parse({ username, password })) {
+    throw new Error("something went wrong with verification");
+  } else {
+    console.log(user.parse({ username, password }));
+  }
 }
 
 ///checking the commit
